@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<h2>Hi, admin. Would you like to add more songs?</h2>
+<div class="row">
+  <div class="column" style="background-color:#BDB76B;">
+    <h2>Songs:</h2>
+    <ul class="song_list">
+      {% for song in songs %}
+        <li><p>{{song}}</p></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="column" style="background-color:#F0F8FF;">
+    <h2>Popularity of songs:</h2>
+    <!-- Make this button below work on toggle between Show Top 3 and All -->
+    <button id="handle_click">Show Top 3</button>
+    <ul class="popular_songs">
+      {% for song in unpopular_songs %}
+        <li><p>{{song}} only {{song.n}} times added {{ ":)" if song.n > 1 else ":(" }}</p></li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
+<div class="formwrapper">
+  <h2 class="title">Add new songs:</h2>
+  <form action="" method="post" novalidate>
+  {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=50) }}<br>
+
+        </p>
+        <p>
+            {{ form.artist.label }}<br>
+            {{ form.artist(size=50) }}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}
